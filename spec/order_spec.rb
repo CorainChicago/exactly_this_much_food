@@ -14,7 +14,8 @@ RSpec.describe Order do
     it "reads the file given and returns an array of each line of text" do 
       menu = order.parse("menu.txt")
       p menu
-      expect(menu[0]).to eq "$15.05"
+      expect(menu[0]).to eq "$15.05\n"
+      expect(menu.length).to eq 7
     end
   end
 
@@ -23,7 +24,6 @@ RSpec.describe Order do
       menu = order.parse("menu.txt")
       goal = order.get_total
       expect(goal).to eq "$15.05"
-
     end
   end
 
