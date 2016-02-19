@@ -64,4 +64,16 @@ RSpec.describe Order do
       expect(order.add_prices(["mixed fruit", "french fries"])).to eq 4.90
     end
   end
+
+  describe "#possible_orders" do
+    it "find the possible orders for a specific total from the menu_hash" do
+      order.parse("menu.txt")
+      order.remove_whitespace
+      order.get_total
+      order.menu_array
+      order.convert_to_hash
+      result = order.possible_orders
+      expect(result.length).to eq 2
+    end 
+  end
 end

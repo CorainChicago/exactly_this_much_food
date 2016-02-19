@@ -43,6 +43,9 @@ class Order
     end
     return sum
   end
+
+  def possible_orders
+  end
 end
 
 
