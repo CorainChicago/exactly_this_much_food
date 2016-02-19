@@ -20,6 +20,10 @@ class Order
     total = @menu_array[0]
   end
 
+  def remove_whitespace
+    menu_array.map! {|item| item.strip }
+  end
+
 end
 
 
