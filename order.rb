@@ -17,13 +17,26 @@ class Order
   end
 
   def get_total
-    total = @menu_array[0]
+    total = @menu_array.shift
   end
 
   def remove_whitespace
     menu_array.map! {|item| item.strip }
   end
 
+  def convert_to_hash
+    #divide at the commas
+    result = menu_array.map! {|string| string.partition(",")}
+    #remove the commas from the nested arrays of strings
+    result = result.each {|arr| arr.delete_if{|item| item == ","}}
+    #flatten the nested arrays
+    result.flatten!
+    #create the hash 
+    @menu_hash = Hash[result.each_slice(2).to_a]
+  end
+
+  def add_prices(items)
+  end
 end
 
 
