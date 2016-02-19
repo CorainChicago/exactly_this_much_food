@@ -1,9 +1,9 @@
 class Order
-  attr_accessor :menu_array, :total
+  attr_accessor :menu_array, :total, :menu_hash
 
   def initialize
     @menu_array = []
-    total = nil
+    @total = nil
   end
 
   def instructions
