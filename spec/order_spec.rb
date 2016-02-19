@@ -66,7 +66,7 @@ RSpec.describe Order do
   end
 
   describe "#possible_orders" do
-    it "find the possible orders for a specific total from the menu_hash" do
+    it "will return 2 order options for a specific total from the menu_hash" do
       order.parse("menu.txt")
       order.remove_whitespace
       order.get_total
