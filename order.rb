@@ -1,3 +1,4 @@
+require 'Pry'
 class Order
   attr_accessor :menu_array, :total, :menu_hash
 
@@ -36,6 +37,11 @@ class Order
   end
 
   def add_prices(items)
+    sum = 0
+    items.each do |item|
+     sum += @menu_hash[item].delete("$").to_f
+    end
+    return sum
   end
 end
 
