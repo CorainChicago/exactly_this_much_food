@@ -10,17 +10,23 @@ RSpec.describe Order do
     end 
   end
 
-  describe "#load_file" do 
-    xit "loads the menu file" do 
+  describe "#parse" do 
+    it "reads the file given and returns an array of each line of text" do 
+      menu = order.parse("menu.txt")
+      p menu
+      expect(menu[0]).to eq "$15.05"
     end
   end
 
-  describe "#parse" do 
-    it "reads the file given and returns an array of each line of text" do 
-      menu1 = order.parse("menu.txt")
-      expect(menu1[0]).to eq "$15.05"
+  describe "#get_total" do 
+    it "takes the first item from the menu_array" do
+      menu = order.parse("menu.txt")
+      goal = order.get_total
+      expect(goal).to eq "$15.05"
+
     end
   end
+
 
   describe "@message_results" do 
   end
