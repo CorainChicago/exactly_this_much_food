@@ -22,7 +22,7 @@ RSpec.describe Order do
     it "takes the first item from the menu_array" do
       menu = order.parse("menu.txt")
       goal = order.get_total
-      expect(goal).to eq "$15.05"
+      expect(goal).to eq  "15.05"
     end
   end
 

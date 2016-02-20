@@ -1,10 +1,11 @@
-require 'Pry'
+
+
 class Order
   attr_accessor :menu_array, :total, :menu_hash
 
   def initialize
     @menu_array = []
-    @total = nil
+    @total = ''
   end
 
   def instructions
@@ -18,7 +19,8 @@ class Order
   end
 
   def get_total
-    total = @menu_array.shift
+    @total = @menu_array.shift.delete("$")
+
   end
 
   def remove_whitespace
