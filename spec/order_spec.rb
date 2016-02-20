@@ -45,7 +45,7 @@ RSpec.describe Order do
     end
 
     it "produces a hash with the item as key and price as value" do
-      order.parse("menu.txt")
+      order.parse("test.txt")
       order.remove_whitespace
       order.get_total
       order.menu_array
@@ -61,19 +61,20 @@ RSpec.describe Order do
       order.get_total
       order.menu_array
       order.convert_to_hash
-      expect(order.add_prices(["mixed fruit", "french fries"])).to eq 4.90
+      expect(order.add_prices(["mixed fruit", "french fries"])).to eq "4.90"
     end
   end
 
   describe "#possible_orders" do
     it "will return 2 order options for a specific total from the menu_hash" do
-      order.parse("menu.txt")
+      order.parse("test.txt")
       order.remove_whitespace
       order.get_total
       order.menu_array
       order.convert_to_hash
-      result = order.possible_orders
+      result = order.find_orders
       expect(result.length).to eq 2
+      expect(result).to eq [["mixed fruit", "mixed fruit", "mixed fruit", "mixed fruit", "mixed fruit", "mixed fruit", "mixed fruit"], ["hot wings", "hot wings", "mixed fruit", "sampler plate"]]
     end 
   end
 end
