@@ -21,6 +21,11 @@ RSpec.describe Order do
     end 
   end
 
+  describe "#load_file" do
+    it "takes the user's input from the command line" do 
+    end
+  end
+
   describe "#parse" do 
     it "reads the file given and returns an array of each line of text" do 
       menu = order.parse("menu.txt")

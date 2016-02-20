@@ -12,6 +12,9 @@ class Order
     p "Welcome to 'Exact Order'! \n This app will provide options from a txt file which match the amount provided on the first line.\n To use this application, please type the name of file you need evaluated (such as a menu) and press enter.\n"  
   end
 
+  def load_file
+  end
+
   def parse(filename)
     File.readlines(filename).each do |line|
      @menu_array << line.chop
@@ -60,7 +63,6 @@ class Order
       temp_order = possible_order.map{|item| item}
       temp_order << @menu_keys_array[i]
       temp_order.sort!
-      p temp_order
       if add_prices(temp_order) == @total
         unless @solutions.include?(temp_order)
           @solutions << temp_order
