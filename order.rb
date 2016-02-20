@@ -8,7 +8,7 @@ class Order
     @total = ''
   end
 
-  def instructions
+  def welcome
     p "Please enter the file you want to upload"
   end
 
