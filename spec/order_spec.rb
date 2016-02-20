@@ -3,10 +3,21 @@ require_relative '../order'
 
 RSpec.describe Order do
 
+  def capture_standard_output(&block)
+    original_stream = $stdout
+    $stdout = mock = StringIO.new
+    yield
+    mock.string.chomp
+    ensure
+    $stdout = original_stream
+  end
+
   let (:order) { Order.new }
 
   describe "attributes" do
     it "messages instructions for the program" do 
+      output = capture_standard_output { order.welcome}
+      expect(output).to be_a_kind_of String
     end 
   end
 
