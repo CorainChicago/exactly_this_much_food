@@ -9,7 +9,7 @@ class Order
   end
 
   def welcome
-    p "Please enter the file you want to upload"
+    p "Welcome to 'Exact Order'! \n This app will provide options from a txt file which match the amount provided on the first line.\n To use this application, please type the name of file you need evaluated (such as a menu) and press enter.\n"  
   end
 
   def parse(filename)
