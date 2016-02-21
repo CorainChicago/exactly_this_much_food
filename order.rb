@@ -1,19 +1,25 @@
 
 
 class Order
-  attr_accessor :menu_array, :total, :menu_hash
+  attr_accessor :menu_array, :total, :menu_hash, :solutions, :file
 
   def initialize
     @menu_array = []
     @total = ''
+    @solutions = []
+    @file = ""
   end
 
-  def instructions
-    p "Please enter the file you want to upload"
+  def welcome
+    puts "Welcome to 'Exact Order'! \n This app will provide options from a txt file which match the amount provided on the first line.\n To use this application, please type the name of file you need evaluated (such as a menu) and press enter.\n"  
   end
 
-  def parse(filename)
-    File.readlines(filename).each do |line|
+  def load_file
+    @file = gets.chomp
+  end
+
+  def parse
+    File.readlines(@file).each do |line|
      @menu_array << line.chop
     end
   end
@@ -60,7 +66,6 @@ class Order
       temp_order = possible_order.map{|item| item}
       temp_order << @menu_keys_array[i]
       temp_order.sort!
-      p temp_order
       if add_prices(temp_order) == @total
         unless @solutions.include?(temp_order)
           @solutions << temp_order
@@ -70,6 +75,16 @@ class Order
         add_items(temp_order, count)  
       end
     end
+  end
+
+  def message_results
+    puts "You have #{@solutions.length} options: \n"
+    @solutions.each do |solution|
+    solution.each  do |s| 
+      puts s
+    end
+    puts "\n \n Next option\n"
+  end
   end
 
 end
