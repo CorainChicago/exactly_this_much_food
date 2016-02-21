@@ -1,11 +1,12 @@
 
 
 class Order
-  attr_accessor :menu_array, :total, :menu_hash
+  attr_accessor :menu_array, :total, :menu_hash, :solutions
 
   def initialize
     @menu_array = []
     @total = ''
+    @solutions = []
   end
 
   def welcome
@@ -73,6 +74,16 @@ class Order
         add_items(temp_order, count)  
       end
     end
+  end
+
+  def message_results
+    puts "You have #{@solutions.length} options: \n"
+    @solutions.each do |solution|
+    solution.each  do |s| 
+      puts s
+    end
+    puts "\n \n Next option\n"
+  end
   end
 
 end

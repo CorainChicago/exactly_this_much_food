@@ -103,4 +103,17 @@ RSpec.describe Order do
       expect(result).to eq [["mixed fruit", "mixed fruit", "mixed fruit", "mixed fruit", "mixed fruit", "mixed fruit", "mixed fruit"], ["hot wings", "hot wings", "mixed fruit", "sampler plate"]]
     end 
   end
+
+  describe "#message_results" do 
+    it "prints the possible orders found for the user" do 
+      order.parse("test.txt")
+      order.remove_whitespace
+      order.get_total
+      order.menu_array
+      order.convert_to_hash
+      order.find_orders
+      expect(order.message_results).to be_a(Array)
+    end
+  end
+
 end
