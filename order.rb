@@ -1,12 +1,13 @@
 
 
 class Order
-  attr_accessor :menu_array, :total, :menu_hash, :solutions
+  attr_accessor :menu_array, :total, :menu_hash, :solutions, :file
 
   def initialize
     @menu_array = []
     @total = ''
     @solutions = []
+    @file = ""
   end
 
   def welcome
@@ -14,11 +15,11 @@ class Order
   end
 
   def load_file
-    filename = gets.chomp
+    @file = gets.chomp
   end
 
-  def parse(filename)
-    File.readlines(filename).each do |line|
+  def parse
+    File.readlines(@file).each do |line|
      @menu_array << line.chop
     end
   end
