@@ -13,6 +13,7 @@ class Order
   end
 
   def load_file
+    filename = gets.chomp
   end
 
   def parse(filename)

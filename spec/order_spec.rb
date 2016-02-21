@@ -22,7 +22,17 @@ RSpec.describe Order do
   end
 
   describe "#load_file" do
+
+    before do
+      $stdin = StringIO.new("test.txt\n")
+    end
+
+    after do
+      $stdin = STDIN
+    end
+
     it "takes the user's input from the command line" do 
+      expect(order.load_file).to be == 'test.txt'
     end
   end
 
