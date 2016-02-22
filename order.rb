@@ -1,10 +1,10 @@
 
 class Order
-  attr_accessor :menu_array, :total, :menu_hash, :solutions, :file
+  attr_accessor :menu_array, :target_price, :menu_hash, :solutions, :file
 
   def initialize
     @menu_array = []
-    @total = ''
+    @target_price = ''
     @solutions = []
     @file = ""
   end
@@ -42,8 +42,8 @@ class Order
     end
   end
 
-  def get_total
-    @total = @menu_array.shift.delete("$")
+  def get_target_price
+    @target_price = @menu_array.shift.delete("$")
   end
 
   def remove_whitespace
@@ -121,10 +121,6 @@ class Order
       end
     end
   end
-
-
-
-
 
 end
 

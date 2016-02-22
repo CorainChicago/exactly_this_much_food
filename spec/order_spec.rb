@@ -58,11 +58,11 @@ RSpec.describe Order do
     end
   end
 
-  describe "#get_total" do 
+  describe "#get_target_price" do 
     it "takes the first item from the menu_array" do
       order.load_file
       order.parse
-      goal = order.get_total
+      goal = order.get_target_price
       expect(goal).to eq  "15.05"
     end 
   end
@@ -82,7 +82,7 @@ RSpec.describe Order do
       order.load_file 
       order.parse
       order.remove_whitespace
-      order.get_total
+      order.get_target_price
       order.menu_array
       order.convert_to_hash
     end
@@ -102,7 +102,7 @@ RSpec.describe Order do
       order.load_file 
       order.parse
       order.remove_whitespace
-      order.get_total
+      order.get_target_price
       order.menu_array
       order.convert_to_hash
     end
@@ -117,13 +117,14 @@ RSpec.describe Order do
       order.load_file 
       order.parse
       order.remove_whitespace
-      order.get_total
+      order.get_target_price
       order.menu_array
       order.convert_to_hash
     end
     
     it "finds two solutions for the test.txt file" do
       result = order.find_orders
+      p result
       expect(result.length).to eq 2
     end
 
@@ -136,11 +137,11 @@ RSpec.describe Order do
   end
 
   describe "#possible_orders" do
-    it "will return 2 order options for a specific total from the menu_hash" do
+    it "will return 2 order options for a specific target_price from the menu_hash" do
       order.load_file
       order.parse
       order.remove_whitespace
-      order.get_total
+      order.get_target_price
       order.menu_array
       order.convert_to_hash
       result = order.find_orders
@@ -154,7 +155,7 @@ RSpec.describe Order do
       order.load_file
       order.parse
       order.remove_whitespace
-      order.get_total
+      order.get_target_price
       order.menu_array
       order.convert_to_hash
       order.find_orders
@@ -169,7 +170,7 @@ RSpec.describe Order do
       order.load_file
       order.parse
       order.remove_whitespace
-      order.get_total
+      order.get_target_price
       order.menu_array
       order.convert_to_hash
       order.find_orders
@@ -182,12 +183,12 @@ RSpec.describe Order do
     order.load_file
     order.parse
     order.remove_whitespace
-    order.get_total
+    order.get_target_price
     order.menu_array
     order.convert_to_hash 
-    order.total = "0.00"
+    order.target_price = "0.00"
     order.find_orders
-    expect(order.total).to eq "0.00"
+    expect(order.target_price).to eq "0.00"
     output = capture_standard_output { order.message_results}
     expect(output).to eq "We didn't find any possible combinations to match the amount you want to spend. Do you want to try again with a new amount? Y/N"
   end
