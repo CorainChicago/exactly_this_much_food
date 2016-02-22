@@ -93,23 +93,37 @@ class Order
     end
   end
 
+  def format_results
+    formatted_solutions = []
+    @solutions.each do |solution|
+      unique_solutions = solution.uniq
+      option = []
+      unique_solutions.each do |s|
+        option << [solution.count(s), s]
+      end
+      formatted_solutions << option
+    end
+    return formatted_solutions
+  end
+
   def message_results
     if @solutions.empty?
       puts "We didn't find any possible combinations to match the amount you want to spend. Do you want to try again with a new amount? Y/N"
     else
       counter = 1
-      puts "\nYou have #{@solutions.length} options. \n"
-      @solutions.each do |solution|
-        puts "\nHere is order for option #{counter}: \n"
-        counter +=1
-        solution.each  do |s| 
-          puts s
+      puts "\nYou have #{@solutions.length} options."
+      format_results.each do |order|
+        puts "\n\nHere is option #{counter}: \n\n"
+        order.each do |item|
+          puts "#{item[0]} of the #{item[1]}"
         end
+        counter += 1
+
       end
     end
   end
 
-  
+
 
 
 

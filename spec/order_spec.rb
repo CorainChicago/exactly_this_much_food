@@ -149,6 +149,20 @@ RSpec.describe Order do
     end 
   end
 
+  describe "#format_results" do 
+    it "formats the @solutions display to provide the count and item" do 
+      order.load_file
+      order.parse
+      order.remove_whitespace
+      order.get_total
+      order.menu_array
+      order.convert_to_hash
+      order.find_orders
+      results = order.format_results
+      expect(results).to eq [[[7, "mixed fruit"]], [[2, "hot wings"], [1, "mixed fruit"], [1, "sampler plate"]]]
+    end
+  end
+
   describe "#message_results" do 
 
     it "prints the possible orders found for the user" do 
@@ -160,7 +174,7 @@ RSpec.describe Order do
       order.convert_to_hash
       order.find_orders
       output = capture_standard_output { order.message_results}
-      expect(output).to eq "You have 2 options: \n\n \n Here is order option 1 \nmixed fruit\nmixed fruit\nmixed fruit\nmixed fruit\nmixed fruit\nmixed fruit\nmixed fruit\n\n \n Here is order option 2 \nhot wings\nhot wings\nmixed fruit\nsampler plate"
+      expect(output).to eq "\nYou have 2 options.\n\n\nHere is option 1: \n\n7 of the mixed fruit\n\n\nHere is option 2: \n\n2 of the hot wings\n1 of the mixed fruit\n1 of the sampler plate"
     end
   end
 
