@@ -70,38 +70,65 @@ RSpec.describe Order do
   end
 
   describe "#convert_to_hash" do 
-    it "converts the array into a hash" do
-      order.load_file
-      order.parse
-      order.remove_whitespace
-      order.get_total
-      order.menu_array
-      order.convert_to_hash
-      expect(order.menu_hash).to be_a(Hash)
-    end
 
-    it "produces a hash with the item as key and price as value" do
-      order.load_file
-      order.parse
-      order.remove_whitespace
-      order.get_total
-      order.menu_array
-      order.convert_to_hash
-     expect(order.menu_hash["mixed fruit"]).to eq "$2.15"
-    end
-  end
-
-  describe "#add_prices" do 
-    it "adds the values for the selected keys" do
+    before do  
       order.load_file 
       order.parse
       order.remove_whitespace
       order.get_total
       order.menu_array
       order.convert_to_hash
+    end
+
+    it "converts the array into a hash" do
+      expect(order.menu_hash).to be_a(Hash)
+    end
+
+    it "produces a hash with the item as key and price as value" do
+      expect(order.menu_hash["mixed fruit"]).to eq "$2.15"
+    end
+
+  end
+
+  describe "#add_prices" do
+    before do  
+      order.load_file 
+      order.parse
+      order.remove_whitespace
+      order.get_total
+      order.menu_array
+      order.convert_to_hash
+    end
+    
+    it "finds the solutions matching" do
       expect(order.add_prices(["mixed fruit", "french fries"])).to eq "4.90"
     end
   end
+
+  describe "#find_orders" do
+    before do  
+      order.load_file 
+      order.parse
+      order.remove_whitespace
+      order.get_total
+      order.menu_array
+      order.convert_to_hash
+    end
+    
+    it "finds two solutions for the test.txt file" do
+      result = order.find_orders
+      expect(result.length).to eq 2
+    end
+
+    it "fills an empty solutions arrays" do 
+      expect(order.solutions).to be_empty
+      order.find_orders
+      expect(order.solutions).not_to be_empty
+    end
+
+  end
+
+
 
   describe "#possible_orders" do
     it "will return 2 order options for a specific total from the menu_hash" do
