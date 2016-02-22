@@ -35,7 +35,7 @@ class Order
        @menu_array << line.chop
       end
     rescue
-      puts "There was an error reading the file, please make sure the file name is  entered correctly."
+      puts "There was an error reading the file, please make sure the file name is entered correctly."
       load_file
       check_filename
       parse
@@ -98,9 +98,9 @@ class Order
       puts "We didn't find any possible combinations to match the amount you want to spend. Do you want to try again with a new amount? Y/N"
     else
       counter = 1
-      puts "You have #{@solutions.length} options: \n"
+      puts "\nYou have #{@solutions.length} options. \n"
       @solutions.each do |solution|
-        puts "\n \n Here is order option #{counter} \n"
+        puts "\nHere is order for option #{counter}: \n"
         counter +=1
         solution.each  do |s| 
           puts s
