@@ -38,8 +38,8 @@ RSpec.describe Order do
     it "checks a filename" do 
       order2 = Order.new
       order2.load_file
-      order.check_filename
-      expect(order.file).to eq "test.txt"
+      order2.check_filename
+      expect(order2.file).to eq "test.txt"
     end
   end
 
