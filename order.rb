@@ -47,14 +47,9 @@ class Order
   end
 
   def convert_to_hash
-    #divide at the commas
     result = menu_array.map! {|string| string.partition(",")}
-    #remove the commas from the nested arrays of strings
     result = result.each {|arr| arr.delete_if{|item| item == ","}}
-    #flatten the nested arrays
-    result.flatten!
-    #create the hash 
-    @menu_hash = Hash[result.each_slice(2).to_a]
+    @menu_hash = Hash[result.flatten!.each_slice(2).to_a]
   end
 
   def add_prices(items)
