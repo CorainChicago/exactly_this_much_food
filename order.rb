@@ -30,7 +30,7 @@ class Order
        @menu_array << line.chop
       end
     rescue
-      puts "There was an error reading the file, please enter the filename again."
+      puts "There was an error reading the file, please make sure the file name is  entered correctly."
       load_file
       check_filename
       parse
