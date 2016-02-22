@@ -33,7 +33,6 @@ RSpec.describe Order do
     it "takes the user's input from the command line" do 
       expect(order.load_file).to be == 'test.txt'
     end
-
   end
 
   describe "#parse" do 
@@ -57,7 +56,7 @@ RSpec.describe Order do
       order.parse
       goal = order.get_total
       expect(goal).to eq  "15.05"
-    end
+    end 
   end
 
   describe "#remove_whitespace" do 

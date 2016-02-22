@@ -26,7 +26,6 @@ class Order
 
   def get_total
     @total = @menu_array.shift.delete("$")
-
   end
 
   def remove_whitespace
@@ -59,7 +58,6 @@ class Order
     add_items(possible_order, 0)
     return @solutions
   end
-
 
   def add_items(possible_order, count)
     for i in 0..@menu_keys_array.length - 1
