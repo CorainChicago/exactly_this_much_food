@@ -1,5 +1,4 @@
 
-
 class Order
   attr_accessor :menu_array, :total, :menu_hash, :solutions, :file
 
@@ -10,23 +9,41 @@ class Order
     @file = ""
   end
 
+  def clear_screen_and_move_to_home
+    print "\e[2J"
+    print "\e[H"
+  end
+
   def welcome
-    puts "Welcome to 'Exact Order'! \n This app will provide options from a txt file which match the amount provided on the first line.\n To use this application, please type the name of file you need evaluated (such as a menu) and press enter.\n"  
+    clear_screen_and_move_to_home
+    puts "Welcome to Exact Order! \n\nThis app will provide options from a file which match the amount provided on the first line.\nTo use this application, please type the name of text file you need evaluated (such as a menu) and press enter. \n \nThe file needs to be in the same folder as the application and be a text file."  
   end
 
   def load_file
     @file = gets.chomp
   end
 
+  def check_filename
+    if @file[-4..-1] != ".txt" 
+      @file = @file << ".txt"
+    end
+  end
+
   def parse
-    File.readlines(@file).each do |line|
-     @menu_array << line.chop
+    begin
+      File.readlines(@file).each do |line|
+       @menu_array << line.chop
+      end
+    rescue
+      puts "There was an error reading the file, please make sure the file name is entered correctly."
+      load_file
+      check_filename
+      parse
     end
   end
 
   def get_total
     @total = @menu_array.shift.delete("$")
-
   end
 
   def remove_whitespace
@@ -60,7 +77,6 @@ class Order
     return @solutions
   end
 
-
   def add_items(possible_order, count)
     for i in 0..@menu_keys_array.length - 1
       temp_order = possible_order.map{|item| item}
@@ -77,15 +93,38 @@ class Order
     end
   end
 
-  def message_results
-    puts "You have #{@solutions.length} options: \n"
+  def format_results
+    formatted_solutions = []
     @solutions.each do |solution|
-    solution.each  do |s| 
-      puts s
+      unique_solutions = solution.uniq
+      option = []
+      unique_solutions.each do |s|
+        option << [solution.count(s), s]
+      end
+      formatted_solutions << option
     end
-    puts "\n \n Next option\n"
+    return formatted_solutions
   end
+
+  def message_results
+    if @solutions.empty?
+      puts "We didn't find any possible combinations to match the amount you want to spend. Do you want to try again with a new amount? Y/N"
+    else
+      counter = 1
+      puts "\nYou have #{@solutions.length} options."
+      format_results.each do |order|
+        puts "\n\nHere is option #{counter}: \n\n"
+        order.each do |item|
+          puts "#{item[0]} of the #{item[1]}"
+        end
+        counter += 1
+      end
+    end
   end
+
+
+
+
 
 end
 
