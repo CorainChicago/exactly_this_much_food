@@ -118,7 +118,6 @@ class Order
           puts "#{item[0]} of the #{item[1]}"
         end
         counter += 1
-
       end
     end
   end
