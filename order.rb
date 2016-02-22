@@ -1,5 +1,4 @@
 
-
 class Order
   attr_accessor :menu_array, :total, :menu_hash, :solutions, :file
 
@@ -10,8 +9,14 @@ class Order
     @file = ""
   end
 
+  def clear_screen_and_move_to_home
+    print "\e[2J"
+    print "\e[H"
+  end
+
   def welcome
-    puts "Welcome to 'Exact Order'! \nThis app will provide options from a txt file which match the amount provided on the first line.\nTo use this application, please type the name of file you need evaluated (such as a menu) and press enter.\n"  
+    clear_screen_and_move_to_home
+    puts "Welcome to Exact Order! \n\nThis app will provide options from a file which match the amount provided on the first line.\nTo use this application, please type the name of file you need evaluated (such as a menu) and press enter.\n"  
   end
 
   def load_file
