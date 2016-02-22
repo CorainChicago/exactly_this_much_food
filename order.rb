@@ -82,12 +82,12 @@ class Order
       temp_order = possible_order.map{|item| item}
       temp_order << @menu_keys_array[i]
       temp_order.sort!
-      if add_prices(temp_order) == @total
+      if add_prices(temp_order) == @target_price
         unless @solutions.include?(temp_order)
           @solutions << temp_order
           return @solutions
         end
-      elsif add_prices(temp_order).to_f < @total.to_f
+      elsif add_prices(temp_order).to_f < @target_price.to_f
         add_items(temp_order, count)  
       end
     end
