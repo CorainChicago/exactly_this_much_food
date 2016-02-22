@@ -16,10 +16,6 @@ RSpec.describe Order do
     $stdin = StringIO.new("test.txt\n")
   end
 
-  after do
-    $stdin = STDIN
-  end
-
   let (:order) { Order.new }
 
   describe "attributes" do
@@ -32,6 +28,18 @@ RSpec.describe Order do
   describe "#load_file" do
     it "takes the user's input from the command line" do 
       expect(order.load_file).to be == 'test.txt'
+    end
+  end
+
+  describe "#check_filename" do 
+      before do
+        $stdin = StringIO.new("test\n")
+      end
+    it "checks a filename" do 
+      order2 = Order.new
+      order2.load_file
+      order.check_filename
+      expect(order.file).to eq "test.txt"
     end
   end
 
