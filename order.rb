@@ -89,13 +89,19 @@ class Order
   end
 
   def message_results
-    puts "You have #{@solutions.length} options: \n"
-    @solutions.each do |solution|
-    solution.each  do |s| 
-      puts s
+    if @solutions.empty?
+      puts "We didn't find any possible combinations to match the amount you want to spend. Do you want to try again with a new amount? Y/N"
+    else
+      counter = 1
+      puts "You have #{@solutions.length} options: \n"
+      @solutions.each do |solution|
+        puts "\n \n Here is order option #{counter} \n"
+        counter +=1
+        solution.each  do |s| 
+          puts s
+        end
+      end
     end
-    puts "\n \n Next option\n"
-  end
   end
 
 end

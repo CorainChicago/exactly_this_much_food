@@ -135,8 +135,6 @@ RSpec.describe Order do
 
   end
 
-
-
   describe "#possible_orders" do
     it "will return 2 order options for a specific total from the menu_hash" do
       order.load_file
@@ -152,6 +150,7 @@ RSpec.describe Order do
   end
 
   describe "#message_results" do 
+
     it "prints the possible orders found for the user" do 
       order.load_file
       order.parse
@@ -160,8 +159,23 @@ RSpec.describe Order do
       order.menu_array
       order.convert_to_hash
       order.find_orders
-      expect(order.message_results).to be_a(Array)
+      output = capture_standard_output { order.message_results}
+      expect(output).to eq "You have 2 options: \n\n \n Here is order option 1 \nmixed fruit\nmixed fruit\nmixed fruit\nmixed fruit\nmixed fruit\nmixed fruit\nmixed fruit\n\n \n Here is order option 2 \nhot wings\nhot wings\nmixed fruit\nsampler plate"
     end
+  end
+
+  it "displays an error message if no sulutions are found" do
+    order.load_file
+    order.parse
+    order.remove_whitespace
+    order.get_total
+    order.menu_array
+    order.convert_to_hash 
+    order.total = "0.00"
+    order.find_orders
+    expect(order.total).to eq "0.00"
+    output = capture_standard_output { order.message_results}
+    expect(output).to eq "We didn't find any possible combinations to match the amount you want to spend. Do you want to try again with a new amount? Y/N"
   end
 
 end
