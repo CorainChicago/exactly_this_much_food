@@ -67,21 +67,11 @@ RSpec.describe Order do
     end 
   end
 
-  describe "#remove_whitespace" do 
-    it "removes the extra whitespace" do 
-      order.load_file
-      order.parse
-      order.remove_whitespace
-      expect(order.menu_array[1]).to eq "mixed fruit,$2.15"
-    end
-  end
-
   describe "#convert_to_hash" do 
 
     before do  
       order.load_file 
       order.parse
-      order.remove_whitespace
       order.get_target_price
       order.menu_array
       order.convert_to_hash
@@ -101,7 +91,6 @@ RSpec.describe Order do
     before do  
       order.load_file 
       order.parse
-      order.remove_whitespace
       order.get_target_price
       order.menu_array
       order.convert_to_hash
@@ -116,7 +105,6 @@ RSpec.describe Order do
     before do  
       order.load_file 
       order.parse
-      order.remove_whitespace
       order.get_target_price
       order.menu_array
       order.convert_to_hash
@@ -140,7 +128,6 @@ RSpec.describe Order do
     it "will return 2 order options for a specific target_price from the menu_hash" do
       order.load_file
       order.parse
-      order.remove_whitespace
       order.get_target_price
       order.menu_array
       order.convert_to_hash
@@ -154,7 +141,6 @@ RSpec.describe Order do
     it "formats the @solutions display to provide the count and item" do 
       order.load_file
       order.parse
-      order.remove_whitespace
       order.get_target_price
       order.menu_array
       order.convert_to_hash
@@ -169,7 +155,6 @@ RSpec.describe Order do
     it "prints the possible orders found for the user" do 
       order.load_file
       order.parse
-      order.remove_whitespace
       order.get_target_price
       order.menu_array
       order.convert_to_hash
@@ -182,7 +167,6 @@ RSpec.describe Order do
   it "displays an error message if no sulutions are found" do
     order.load_file
     order.parse
-    order.remove_whitespace
     order.get_target_price
     order.menu_array
     order.convert_to_hash 

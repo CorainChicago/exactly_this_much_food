@@ -46,10 +46,6 @@ class Order
     @target_price = @menu_array.shift.delete("$")
   end
 
-  def remove_whitespace
-    menu_array.map! {|item| item.strip }
-  end
-
   def convert_to_hash
     #divide at the commas
     result = menu_array.map! {|string| string.partition(",")}
