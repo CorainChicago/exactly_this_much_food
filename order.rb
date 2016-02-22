@@ -11,16 +11,29 @@ class Order
   end
 
   def welcome
-    puts "Welcome to 'Exact Order'! \n This app will provide options from a txt file which match the amount provided on the first line.\n To use this application, please type the name of file you need evaluated (such as a menu) and press enter.\n"  
+    puts "Welcome to 'Exact Order'! \nThis app will provide options from a txt file which match the amount provided on the first line.\nTo use this application, please type the name of file you need evaluated (such as a menu) and press enter.\n"  
   end
 
   def load_file
     @file = gets.chomp
   end
 
+  def check_filename
+    if @file[-4..-1] != ".txt" 
+      @file = @file << ".txt"
+    end
+  end
+
   def parse
-    File.readlines(@file).each do |line|
-     @menu_array << line.chop
+    begin
+      File.readlines(@file).each do |line|
+       @menu_array << line.chop
+      end
+    rescue
+      puts "There was an error reading the file, please enter the filename again."
+      load_file
+      check_filename
+      parse
     end
   end
 
