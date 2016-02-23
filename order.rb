@@ -103,7 +103,7 @@ class Order
       puts "We didn't find any possible combinations to match the amount you want to spend. You can update the file and rerun the program."
     else
       counter = 1
-      puts "\nYou have #{@solutions.length} options."
+      puts "\nYou have #{@solutions.length} options which add up to the target price of $#{@target_price}."
       format_results.each do |order|
         puts "\n\nHere is option #{counter}: \n\n"
         order.each do |item|
