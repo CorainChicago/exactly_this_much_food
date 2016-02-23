@@ -27,7 +27,7 @@ RSpec.describe Order do
 
   describe "#load_file" do
     it "takes the user's input from the command line" do 
-      expect(order.load_file).to be == 'test.txt'
+      expect(order.load_file).to eq 'test.txt'
     end
   end
 
@@ -39,16 +39,17 @@ RSpec.describe Order do
       order2 = Order.new
       order2.load_file
       order2.check_filename
-      expect(order2.file).to eq "test.txt"
+      expect(order2.file).to eq "menu_files/test.txt"
     end
   end
 
   describe "#parse" do 
     it "reads the file given and returns an array of each line of text" do 
       order.load_file
-      menu = order.parse
-      expect(menu[0]).to eq "$15.05\n"
-      expect(menu.length).to eq 7
+      result = order.parse
+      p result
+      expect(result[0]).to eq "$15.05"
+      expect(result.length).to eq 7
     end
     it "adds the lines to th @menu_array" do
     expect(order.menu_array).to be_empty

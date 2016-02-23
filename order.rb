@@ -16,9 +16,10 @@ class Order
 
   def welcome
     clear_screen_and_move_to_home
-    puts "Welcome to Exact Order! \n\nThis app will provide options from a file which match the amount provided on the first line.\nTo use this application, please type the name of text file you need evaluated (such as a menu) and press enter. \n \nThe file needs to be in the same folder as the application and be a text file."  
+    puts "Welcome to Exact Order! \n\nThis app will provide options from a file which match the amount provided on the first line. To use this application, please type the name of text file you need evaluated (such as a menu) and press enter. \n \nThe file needs to be in the same folder as the application and be a text file."  
   end
 
+  #set_file_name
   def load_file
     @file = gets.chomp
   end
@@ -27,12 +28,17 @@ class Order
     if @file[-4..-1] != ".txt" 
       @file = @file << ".txt"
     end
+    if @file[0..8] != "menu_files"
+      @file  = "menu_files/" << @file
+    end
   end
 
+  #update to create hash not array
   def parse
     begin
-      File.readlines(@file).each do |line|
-       @menu_array << line.chop
+      data = File.open(@file)
+      data.each do |line|
+         @menu_array << line.chop
       end
     rescue
       puts "There was an error reading the file, please make sure the file name is entered correctly."
@@ -40,18 +46,21 @@ class Order
       check_filename
       parse
     end
+    return @menu_array
   end
 
   def get_target_price
     @target_price = @menu_array.shift.delete("$")
   end
 
+  #make options to check for any punctuation, not just a comma
   def convert_to_hash
     result = menu_array.map! {|string| string.partition(",")}
     result = result.each {|arr| arr.delete_if{|item| item == ","}}
     @menu_hash = Hash[result.flatten!.each_slice(2).to_a]
   end
 
+  #get_order_total
   def add_prices(items)
     sum = 0.00
     items.each do |item|
