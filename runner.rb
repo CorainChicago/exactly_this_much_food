@@ -1,7 +1,6 @@
 require_relative 'order'
 order = Order.new
 
-
 order.welcome
 order.load_file
 order.check_filename

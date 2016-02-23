@@ -77,7 +77,7 @@ class Order
 
   def add_items(possible_order, count)
     for i in 0..@menu_keys_array.length - 1
-      temp_order = possible_order.map{|item| item}
+      temp_order = possible_order.map{ |item| item }
       temp_order << @menu_keys_array[i]
       temp_order.sort!
       if get_order_total(temp_order) == @target_price
