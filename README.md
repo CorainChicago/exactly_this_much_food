@@ -4,8 +4,8 @@ A command line program to return orders from a menu file which exactly match the
 
 ## Instructions
 
-* [Clone](https://help.github.com/articles/cloning-a-repository/) to your computer.
-* Add the text file(s) (the filename should end in ".txt") into this folder in the program.  The target price needs to be on the first line on the file and menu item should follow.  The menu items need to follow this format of "item, $price", for example "french fries, $2.50".  
+* [Clone](https://help.github.com/articles/cloning-a-repository/) this repository to your computer.
+* Add the text file(s) (filename ending in ".txt") into this folder in the program.  The target price needs to be on the first line on the file and menu item should follow.  The menu items need to follow this format of "item, $price", for example "french fries, $2.50".  
 
 
 ```text
@@ -18,11 +18,11 @@ mozzarella sticks,$4.20
 sampler plate,$5.80
 ```
 
-* Open a terminal window and navigate to the location of the file
+* Open a terminal window and navigate to the location of the cloned files on your computer
 * Type `ruby runner.rb` to run the program
 
 
-If you want to change the target price for your order, please update the number in your file. 
+If you want to change the target price for your order, please update the number in your file, save and restart the program. 
 
 
 
