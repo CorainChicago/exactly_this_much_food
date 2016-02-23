@@ -19,7 +19,6 @@ class Order
     puts "Welcome to Exact Order! \n\nThis app will provide options from a file which match the amount provided on the first line. To use this application, please type the name of text file you need evaluated (such as a menu) and press enter. \n \nThe file needs to be in the same folder as the application and be a text file."  
   end
 
-  #set_file_name
   def load_file
     @file = gets.chomp
   end
@@ -38,10 +37,10 @@ class Order
     begin
       data = File.open(@file)
       data.each do |line|
-         @menu_array << line.chop
+        @menu_array << line.chomp
       end
     rescue
-      puts "There was an error reading the file, please make sure the file name is entered correctly."
+      puts "There was an error reading the file, please make sure the file name is entered correctly and in the menu_files folder."
       load_file
       check_filename
       parse
@@ -54,14 +53,13 @@ class Order
   end
 
   #make options to check for any punctuation, not just a comma
-  def convert_to_hash
-    result = menu_array.map! {|string| string.partition(",")}
+  def convert_array_to_hash
+    result = @menu_array.map! {|string| string.partition(",")}
     result = result.each {|arr| arr.delete_if{|item| item == ","}}
     @menu_hash = Hash[result.flatten!.each_slice(2).to_a]
   end
 
-  #get_order_total
-  def add_prices(items)
+  def get_order_total(items)
     sum = 0.00
     items.each do |item|
       sum += @menu_hash[item].delete("$").to_f
@@ -82,12 +80,12 @@ class Order
       temp_order = possible_order.map{|item| item}
       temp_order << @menu_keys_array[i]
       temp_order.sort!
-      if add_prices(temp_order) == @target_price
+      if get_order_total(temp_order) == @target_price
         unless @solutions.include?(temp_order)
           @solutions << temp_order
           return @solutions
         end
-      elsif add_prices(temp_order).to_f < @target_price.to_f
+      elsif get_order_total(temp_order).to_f < @target_price.to_f
         add_items(temp_order, count)  
       end
     end
@@ -108,7 +106,7 @@ class Order
 
   def message_results
     if @solutions.empty?
-      puts "We didn't find any possible combinations to match the amount you want to spend. Do you want to try again with a new amount? Y/N"
+      puts "We didn't find any possible combinations to match the amount you want to spend. You can update the file and rerun the program."
     else
       counter = 1
       puts "\nYou have #{@solutions.length} options."
