@@ -1,10 +1,10 @@
 
 class Order
-  attr_accessor :menu_array, :total, :menu_hash, :solutions, :file
+  attr_accessor :menu_array, :target_price, :menu_hash, :solutions, :file
 
   def initialize
     @menu_array = []
-    @total = ''
+    @target_price = ''
     @solutions = []
     @file = ""
   end
@@ -16,7 +16,7 @@ class Order
 
   def welcome
     clear_screen_and_move_to_home
-    puts "Welcome to Exact Order! \n\nThis app will provide options from a file which match the amount provided on the first line.\nTo use this application, please type the name of text file you need evaluated (such as a menu) and press enter. \n \nThe file needs to be in the same folder as the application and be a text file."  
+    puts "Welcome to Exact Order! \n\nThis app will provide options from a file which match the amount provided on the first line. To use this application, please type the name of text file you need evaluated (such as a menu) and press enter. \n \nThe file needs to be in the same folder as the application and be a text file."  
   end
 
   def load_file
@@ -27,41 +27,39 @@ class Order
     if @file[-4..-1] != ".txt" 
       @file = @file << ".txt"
     end
+    if @file[0..8] != "menu_files"
+      @file  = "menu_files/" << @file
+    end
   end
 
+  #update to create hash not array
   def parse
     begin
-      File.readlines(@file).each do |line|
-       @menu_array << line.chop
+      data = File.open(@file)
+      data.each do |line|
+        @menu_array << line.chomp
       end
     rescue
-      puts "There was an error reading the file, please make sure the file name is entered correctly."
+      puts "There was an error reading the file, please make sure the file name is entered correctly and in the menu_files folder."
       load_file
       check_filename
       parse
     end
+    return @menu_array
   end
 
-  def get_total
-    @total = @menu_array.shift.delete("$")
+  def get_target_price
+    @target_price = @menu_array.shift.delete("$")
   end
 
-  def remove_whitespace
-    menu_array.map! {|item| item.strip }
-  end
-
-  def convert_to_hash
-    #divide at the commas
-    result = menu_array.map! {|string| string.partition(",")}
-    #remove the commas from the nested arrays of strings
+  #make options to check for any punctuation, not just a comma
+  def convert_array_to_hash
+    result = @menu_array.map! {|string| string.partition(",")}
     result = result.each {|arr| arr.delete_if{|item| item == ","}}
-    #flatten the nested arrays
-    result.flatten!
-    #create the hash 
-    @menu_hash = Hash[result.each_slice(2).to_a]
+    @menu_hash = Hash[result.flatten!.each_slice(2).to_a]
   end
 
-  def add_prices(items)
+  def get_order_total(items)
     sum = 0.00
     items.each do |item|
       sum += @menu_hash[item].delete("$").to_f
@@ -82,12 +80,12 @@ class Order
       temp_order = possible_order.map{|item| item}
       temp_order << @menu_keys_array[i]
       temp_order.sort!
-      if add_prices(temp_order) == @total
+      if get_order_total(temp_order) == @target_price
         unless @solutions.include?(temp_order)
           @solutions << temp_order
           return @solutions
         end
-      elsif add_prices(temp_order).to_f < @total.to_f
+      elsif get_order_total(temp_order).to_f < @target_price.to_f
         add_items(temp_order, count)  
       end
     end
@@ -108,7 +106,7 @@ class Order
 
   def message_results
     if @solutions.empty?
-      puts "We didn't find any possible combinations to match the amount you want to spend. Do you want to try again with a new amount? Y/N"
+      puts "We didn't find any possible combinations to match the amount you want to spend. You can update the file and rerun the program."
     else
       counter = 1
       puts "\nYou have #{@solutions.length} options."
@@ -121,10 +119,6 @@ class Order
       end
     end
   end
-
-
-
-
 
 end
 
