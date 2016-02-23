@@ -11,3 +11,4 @@ order.convert_array_to_hash
 order.find_orders
 order.format_results
 order.message_results
+order.offer_to_repeat

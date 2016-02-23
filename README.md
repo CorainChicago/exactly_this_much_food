@@ -2,10 +2,10 @@
 
 A command line program to return orders from a menu file which exactly match the target price. 
 
-**Instructions **
+## Instructions
 
 * [Clone](https://help.github.com/articles/cloning-a-repository/) to your computer.
-* Add the text file(s) (the filename should end in ".txt") to the `menu-files` folder in the program.  The target price needs to be on the first line on the file and menu item should follow.  The menu items need to follow this format of "item, $price", for example "french fries, $2.50".  
+* Add the text file(s) (the filename should end in ".txt") into this folder in the program.  The target price needs to be on the first line on the file and menu item should follow.  The menu items need to follow this format of "item, $price", for example "french fries, $2.50".  
 
 
 ```text
