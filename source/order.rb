@@ -16,7 +16,7 @@ class Order
 
   def welcome
     clear_screen_and_move_to_home
-    puts "Welcome to Exact Order! \n\nThis app will provide options from a file which match the amount provided on the first line. To use this application, please type the name of text file you need evaluated (such as a menu) and press enter. \n \nThe file needs to be in the same folder as the application and be a text file."  
+    puts "Welcome to Exact Order! \n\nThis app will provide options from a file which match the amount provided on the first line. To use this application, please type the name of text file you need evaluated (such as a menu) and press enter. \n \nThe text file needs to be in the same folder as the application and be a text file."  
   end
 
   def load_file
@@ -32,7 +32,6 @@ class Order
     end
   end
 
-  #update to create hash not array
   def parse
     begin
       data = File.open(@file)
@@ -52,7 +51,6 @@ class Order
     @target_price = @menu_array.shift.delete("$")
   end
 
-  #make options to check for any punctuation, not just a comma
   def convert_array_to_hash
     result = @menu_array.map! {|string| string.partition(",")}
     result = result.each {|arr| arr.delete_if{|item| item == ","}}

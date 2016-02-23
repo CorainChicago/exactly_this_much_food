@@ -1,4 +1,4 @@
-require_relative 'order'
+require_relative 'source/order'
 order = Order.new
 
 order.welcome

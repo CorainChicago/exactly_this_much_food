@@ -1,6 +1,5 @@
 require_relative '../order'
 
-
 RSpec.describe Order do
 
   def capture_standard_output(&block)
