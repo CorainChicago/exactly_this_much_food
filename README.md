@@ -8,7 +8,7 @@ A command line program to return orders from a menu file which exactly match the
 * Add the text file(s) (the filename should end in ".txt") to the `menu-files` folder in the program.  The target price needs to be on the first line on the file and menu item should follow.  The menu items need to follow this format of "item, $price", for example "french fries, $2.50".  
 
 
-```ruby
+```text
 $15.05
 mixed fruit, $2.15
 french fries,$2.75
