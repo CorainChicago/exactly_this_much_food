@@ -1,4 +1,3 @@
-
 class Order
   attr_accessor :menu_array, :target_price, :menu_hash, :solutions, :file
 
@@ -16,7 +15,7 @@ class Order
 
   def welcome
     clear_screen_and_move_to_home
-    puts "Welcome to Exact Order! \n\nThis app will provide options from a file which match the amount provided on the first line. To use this application, please type the name of text file you need evaluated (such as a menu) and press enter. \n \nThe text file needs to be in the same folder as the application and be a text file."  
+    puts "Welcome to Exact Order! \n\nThis app will provide options from a file which match the amount provided on the first line. To use this application, please type the name of text file you need evaluated (such as a menu) and press enter. \n \nThe text file needs to be in the same folder as the application and be a text file.\n"  
   end
 
   def load_file
@@ -27,9 +26,6 @@ class Order
     if @file[-4..-1] != ".txt" 
       @file = @file << ".txt"
     end
-    if @file[0..8] != "menu_files"
-      @file  = "menu_files/" << @file
-    end
   end
 
   def parse
@@ -39,7 +35,7 @@ class Order
         @menu_array << line.chomp
       end
     rescue
-      puts "There was an error reading the file, please make sure the file name is entered correctly and in the menu_files folder."
+      puts "There was an error reading the file, please make sure the file name is entered correctly and in this folder (not listed in a sub-directory)."
       load_file
       check_filename
       parse
@@ -115,6 +111,31 @@ class Order
         end
         counter += 1
       end
+    end
+  end
+
+  def offer_to_repeat
+    puts "\n\nDo you want to search another folder? Type 'Y' or 'N'"
+    response = gets.chomp
+    if response == 'Y' || response == 'y'
+      @menu_array = []
+      @target_price = ''
+      @solutions = []
+      @file = ""
+      puts "\nPlease enter the name of the text file you want to use.\n"
+      load_file
+      check_filename
+      parse
+      get_target_price
+      menu_array
+      convert_array_to_hash
+      find_orders
+      format_results
+      message_results
+      offer_to_repeat
+    else
+      puts "Have a great meal."
+      return
     end
   end
 

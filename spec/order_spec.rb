@@ -38,7 +38,7 @@ RSpec.describe Order do
       order2 = Order.new
       order2.load_file
       order2.check_filename
-      expect(order2.file).to eq "menu_files/test.txt"
+      expect(order2.file).to eq "test.txt"
     end
   end
 
@@ -165,6 +165,7 @@ RSpec.describe Order do
 
   it "displays an error message if no sulutions are found" do
     order.load_file
+    order.check_filename
     order.parse
     order.get_target_price
     order.menu_array
