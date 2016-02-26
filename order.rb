@@ -1,5 +1,9 @@
+require_relative 'messenger'
+
 class Order
   attr_accessor :menu_array, :target_price, :menu_hash, :solutions, :file
+
+  include Messenger
 
   def initialize
     @menu_array = []
@@ -35,7 +39,8 @@ class Order
         @menu_array << line.chomp
       end
     rescue
-      puts "There was an error reading the file, please make sure the file name is entered correctly and in this folder (not listed in a sub-directory)."
+      message_error_enter_file_name_again
+      # puts "There was an error reading the file, please make sure the file name is entered correctly and in this folder (not listed in a sub-directory)."
       load_file
       check_filename
       parse
