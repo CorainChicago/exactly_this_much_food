@@ -17,13 +17,6 @@ RSpec.describe Order do
 
   let (:order) { Order.new }
 
-  describe "attributes" do
-    it "messages instructions for the program" do 
-      output = capture_standard_output { order.welcome}
-      expect(output).to be_a_kind_of String
-    end 
-  end
-
   describe "#load_file" do
     it "takes the user's input from the command line" do 
       expect(order.load_file).to eq 'test.txt'

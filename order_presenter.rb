@@ -11,7 +11,8 @@ class OrderPresenter
   end
 
   def run
-    order.welcome
+    clear_screen_and_move_to_home
+    order.message_welcome
     order.load_file
     order.check_filename
     order.parse
@@ -23,4 +24,11 @@ class OrderPresenter
     order.message_results
     order.offer_to_repeat
   end
+
+  def clear_screen_and_move_to_home
+    print "\e[2J"
+    print "\e[H"
+  end
+
+
 end

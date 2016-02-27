@@ -12,15 +12,15 @@ class Order
     @file = ""
   end
 
-  def clear_screen_and_move_to_home
-    print "\e[2J"
-    print "\e[H"
-  end
+  # def clear_screen_and_move_to_home
+  #   print "\e[2J"
+  #   print "\e[H"
+  # end
 
-  def welcome
-    clear_screen_and_move_to_home
-    message_welcome
-  end
+  # def welcome
+  #   clear_screen_and_move_to_home
+  #   message_welcome
+  # end
 
   def load_file
     @file = gets.chomp
