@@ -1,7 +1,10 @@
 require_relative 'order.rb'
+require_relative 'messenger.rb'
 
 class OrderPresenter
   attr_accessor :order
+
+  include Messenger
 
   def initialize
     @order = Order.new
