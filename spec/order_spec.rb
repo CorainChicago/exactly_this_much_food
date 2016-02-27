@@ -136,8 +136,8 @@ RSpec.describe Order do
       order.get_target_price
       order.menu_array
       order.convert_array_to_hash
-      order.find_orders
-      results = order.format_results
+      solutions = order.find_orders
+      results = order.format_results(solutions)
       expect(results).to eq [[[7, "mixed fruit"]], [[2, "hot wings"], [1, "mixed fruit"], [1, "sampler plate"]]]
     end
   end
@@ -150,8 +150,9 @@ RSpec.describe Order do
       order.get_target_price
       order.menu_array
       order.convert_array_to_hash
-      order.find_orders
-      output = capture_standard_output { order.message_results}
+      solutions = order.find_orders
+      formatted_results = order.format_results(solutions)
+      output = capture_standard_output { order.message_results(solutions, formatted_results)}
       expect(output).to eq "\nYou have 2 options which add up to the target price of $15.05.\n\n\nHere is option 1: \n\n7 of the mixed fruit\n\n\nHere is option 2: \n\n2 of the hot wings\n1 of the mixed fruit\n1 of the sampler plate"
     end
   end
@@ -164,9 +165,10 @@ RSpec.describe Order do
     order.menu_array
     order.convert_array_to_hash 
     order.target_price = "0.00"
-    order.find_orders
+    solutions = order.find_orders
+    formatted_results = order.format_results(solutions)
     expect(order.target_price).to eq "0.00"
-    output = capture_standard_output { order.message_results}
+    output = capture_standard_output { order.message_results(solutions, formatted_results)}
     expect(output).to eq "We didn't find any possible combinations to match the amount you want to spend. You can update the file and rerun the program."
   end
 

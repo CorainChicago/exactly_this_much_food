@@ -19,8 +19,8 @@ class OrderPresenter
     order.get_target_price
     order.menu_array
     order.convert_array_to_hash
-    order.find_orders
-    order.format_results
+    solutions = order.find_orders
+    formatted_solutions = order.format_results(solutions)
     order.message_results
     order.offer_to_repeat
   end

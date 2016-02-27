@@ -79,9 +79,9 @@ class Order
     end
   end
 
-  def format_results
+  def format_results(solutions)
     formatted_solutions = []
-    @solutions.each do |solution|
+    solutions.each do |solution|
       unique_solutions = solution.uniq
       option = []
       unique_solutions.each do |s|
@@ -92,13 +92,13 @@ class Order
     return formatted_solutions
   end
 
-  def message_results
-    if @solutions.empty?
+  def message_results(solutions, format_results)
+    if solutions.empty?
       message_no_results
     else
       counter = 1
       puts "\nYou have #{@solutions.length} options which add up to the target price of $#{@target_price}."
-      format_results.each do |order|
+      format_results(solutions).each do |order|
         puts "\n\nHere is option #{counter}: \n\n"
         order.each do |item|
           puts "#{item[0]} of the #{item[1]}"
