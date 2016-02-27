@@ -31,4 +31,11 @@ RSpec.describe Messenger do
     end
   end
 
+  describe "#message_no_results" do
+    it "displays a wecome message" do 
+      output = capture_standard_output { example.message_no_results}
+      expect(output).to eq "We didn't find any possible combinations to match the amount you want to spend. You can update the file and rerun the program."  
+    end
+  end
+
 end

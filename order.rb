@@ -12,16 +12,6 @@ class Order
     @file = ""
   end
 
-  # def clear_screen_and_move_to_home
-  #   print "\e[2J"
-  #   print "\e[H"
-  # end
-
-  # def welcome
-  #   clear_screen_and_move_to_home
-  #   message_welcome
-  # end
-
   def load_file
     @file = gets.chomp
   end
@@ -40,7 +30,6 @@ class Order
       end
     rescue
       message_error_enter_file_name_again
-      # puts "There was an error reading the file, please make sure the file name is entered correctly and in this folder (not listed in a sub-directory)."
       load_file
       check_filename
       parse
@@ -105,7 +94,7 @@ class Order
 
   def message_results
     if @solutions.empty?
-      puts "We didn't find any possible combinations to match the amount you want to spend. You can update the file and rerun the program."
+      message_no_results
     else
       counter = 1
       puts "\nYou have #{@solutions.length} options which add up to the target price of $#{@target_price}."
