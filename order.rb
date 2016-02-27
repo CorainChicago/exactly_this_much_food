@@ -92,13 +92,13 @@ class Order
     return formatted_solutions
   end
 
-  def message_results(solutions, format_results)
+  def message_results(solutions, formatted_results)
     if solutions.empty?
       message_no_results
     else
       counter = 1
       puts "\nYou have #{@solutions.length} options which add up to the target price of $#{@target_price}."
-      format_results(solutions).each do |order|
+      formatted_results.each do |order|
         puts "\n\nHere is option #{counter}: \n\n"
         order.each do |item|
           puts "#{item[0]} of the #{item[1]}"
@@ -120,12 +120,12 @@ class Order
       load_file
       check_filename
       parse
-      get_target_price
+      target_price = get_target_price
       menu_array
       convert_array_to_hash
-      find_orders
-      format_results
-      message_results
+      solutions = find_orders
+      formatted_results = format_results(solutions)
+      message_results(solutions, formatted_results)
       offer_to_repeat
     else
       puts "Have a great meal."
