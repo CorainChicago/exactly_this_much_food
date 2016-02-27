@@ -23,5 +23,12 @@ RSpec.describe Messenger do
       expect(output).to eq "There was an error reading the file, please make sure the file name is entered correctly and in this folder (not listed in a sub-directory)."
     end
   end
+  
+  describe "#message_welcome" do
+    it "displays a wecome message" do 
+      output = capture_standard_output { example.message_welcome }
+      expect(output).to eq "Welcome to Exact Order! \n\nThis app will provide options from a file which match the amount provided on the first line. To use this application, please type the name of text file you need evaluated (such as a menu) and press enter. \n \nThe text file needs to be in the same folder as the application and be a text file."  
+    end
+  end
 
 end
