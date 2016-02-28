@@ -13,7 +13,7 @@ module Messenger
     puts "\nWe didn't find any possible combinations to match the amount you want to spend. You can update the file and rerun the program.\n"
   end
 
-  def message_have_great_meal
+  def message_have_a_great_meal
     puts "Have a great meal."
   end
 

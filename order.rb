@@ -22,7 +22,8 @@ class Order
     end
   end
 
-  def parse
+  def parse(file)
+    menu_array = []
     begin
       data = File.open(@file)
       data.each do |line|
@@ -118,8 +119,8 @@ class Order
       @file = ""
       puts "\nPlease enter the name of the text file you want to use.\n"
       load_file
-      check_filename
-      parse
+      file = check_filename
+      parse(file)
       target_price = get_target_price
       menu_array
       convert_array_to_hash

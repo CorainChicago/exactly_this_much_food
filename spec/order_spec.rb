@@ -37,24 +37,23 @@ RSpec.describe Order do
 
   describe "#parse" do 
     it "reads the file given and returns an array of each line of text" do 
-      order.load_file
-      result = order.parse
-      p result
+      file = order.load_file
+      result = order.parse(file)
       expect(result[0]).to eq "$15.05"
       expect(result.length).to eq 7
     end
     it "adds the lines to th @menu_array" do
     expect(order.menu_array).to be_empty
-    order.load_file
-    order.parse
+    file = order.load_file
+    order.parse(file)
     expect(order.menu_array).not_to be_empty
     end
   end
 
   describe "#get_target_price" do 
     it "takes the first item from the menu_array" do
-      order.load_file
-      order.parse
+      file = order.load_file
+      order.parse(file)
       goal = order.get_target_price
       expect(goal).to eq  "15.05"
     end 
@@ -63,8 +62,8 @@ RSpec.describe Order do
   describe "#convert_array_to_hash" do 
 
     before do  
-      order.load_file 
-      order.parse
+      file = order.load_file
+      order.parse(file)
       order.get_target_price
       order.menu_array
       order.convert_array_to_hash
@@ -82,8 +81,8 @@ RSpec.describe Order do
 
   describe "#get_order_total" do
     before do  
-      order.load_file 
-      order.parse
+      file = order.load_file
+      order.parse(file)
       order.get_target_price
       order.menu_array
       order.convert_array_to_hash
@@ -96,8 +95,8 @@ RSpec.describe Order do
 
   describe "#find_orders" do
     before do  
-      order.load_file 
-      order.parse
+      file = order.load_file
+      order.parse(file)
       order.get_target_price
       order.menu_array
       order.convert_array_to_hash
@@ -118,8 +117,8 @@ RSpec.describe Order do
 
   describe "#possible_orders" do
     it "will return 2 order options for a specific target_price from the menu_hash" do
-      order.load_file
-      order.parse
+      file = order.load_file
+      order.parse(file)
       order.get_target_price
       order.menu_array
       order.convert_array_to_hash
@@ -131,8 +130,8 @@ RSpec.describe Order do
 
   describe "#format_results" do 
     it "formats the @solutions display to provide the count and item" do 
-      order.load_file
-      order.parse
+      file = order.load_file
+      order.parse(file)
       order.get_target_price
       order.menu_array
       order.convert_array_to_hash

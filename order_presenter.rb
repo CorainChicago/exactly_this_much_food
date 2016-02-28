@@ -14,8 +14,8 @@ class OrderPresenter
     clear_screen_and_move_to_home
     order.message_welcome
     order.load_file
-    order.check_filename
-    order.parse
+    file = order.check_filename
+    order.parse(file)
     order.get_target_price
     order.menu_array
     order.convert_array_to_hash
