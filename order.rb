@@ -128,7 +128,7 @@ class Order
       message_results(solutions, formatted_results)
       offer_to_repeat
     else
-      puts "Have a great meal."
+      message_have_a_great_meal
       return
     end
   end

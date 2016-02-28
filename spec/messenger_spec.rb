@@ -20,7 +20,7 @@ RSpec.describe Messenger do
   describe "#message_error_enter_file_name_again" do 
     it "displays the message about an error and needing to enter the file name again" do
       output = capture_standard_output { example.message_error_enter_file_name_again }
-      expect(output).to eq "There was an error reading the file, please make sure the file name is entered correctly and in this folder (not listed in a sub-directory)."
+      expect(output).to eq "\nThere was an error reading the file, please make sure the file name is entered correctly and in this folder (not listed in a sub-directory)."
     end
   end
   
@@ -34,7 +34,14 @@ RSpec.describe Messenger do
   describe "#message_no_results" do
     it "displays a wecome message" do 
       output = capture_standard_output { example.message_no_results}
-      expect(output).to eq "We didn't find any possible combinations to match the amount you want to spend. You can update the file and rerun the program."  
+      expect(output).to eq "\nWe didn't find any possible combinations to match the amount you want to spend. You can update the file and rerun the program."  
+    end
+  end
+
+   describe "#message_have_great_meal" do
+    it "displays a message to conclude the interaction" do 
+      output = capture_standard_output { example.message_have_great_meal}
+      expect(output).to eq "Have a great meal."  
     end
   end
 
