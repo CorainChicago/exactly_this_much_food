@@ -40,7 +40,7 @@ RSpec.describe Messenger do
 
    describe "#message_have_great_meal" do
     it "displays a message to conclude the interaction" do 
-      output = capture_standard_output { example.message_have_great_meal}
+      output = capture_standard_output { example.message_have_a_great_meal}
       expect(output).to eq "Have a great meal."  
     end
   end
