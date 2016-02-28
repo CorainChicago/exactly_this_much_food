@@ -13,6 +13,10 @@ module Messenger
     puts "\nWe didn't find any possible combinations to match the amount you want to spend. You can update the file and rerun the program.\n"
   end
 
+  def message_number_solutions_with_price(number, price)
+    puts "\nYou have #{number} options which add up to the target price of $#{price}."
+  end
+
   def message_have_a_great_meal
     puts "Have a great meal."
   end

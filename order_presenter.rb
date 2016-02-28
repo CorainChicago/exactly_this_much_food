@@ -35,7 +35,8 @@ class OrderPresenter
       message_no_results
     else
       counter = 1
-      puts "\nYou have #{solutions.length} options which add up to the target price of $#{target_price}."
+      message_number_solutions_with_price(solutions.length, target_price)
+      # puts "\nYou have #{solutions.length} options which add up to the target price of $#{target_price}."
       formatted_results.each do |order|
         puts "\n\nHere is option #{counter}: \n\n"
         order.each do |item|
