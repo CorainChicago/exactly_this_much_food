@@ -94,22 +94,6 @@ class Order
     return formatted_solutions
   end
 
-  # def message_results(solutions, formatted_results)
-  #   if solutions.empty?
-  #     message_no_results
-  #   else
-  #     counter = 1
-  #     puts "\nYou have #{@solutions.length} options which add up to the target price of $#{@target_price}."
-  #     formatted_results.each do |order|
-  #       puts "\n\nHere is option #{counter}: \n\n"
-  #       order.each do |item|
-  #         puts "#{item[0]} of the #{item[1]}"
-  #       end
-  #       counter += 1
-  #     end
-  #   end
-  # end
-
   def offer_to_repeat
     puts "\n\nDo you want to search another folder? Type 'Y' or 'N'"
     response = gets.chomp
