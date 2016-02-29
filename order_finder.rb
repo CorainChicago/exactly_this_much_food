@@ -10,16 +10,15 @@ module OrderFinder
 
   def find_orders(menu_hash, target_price)
     solutions = []
-    @menu_keys_array = Array.new(menu_hash.keys)
     possible_order = []
     add_items(possible_order, target_price, menu_hash, solutions)
     return solutions
   end
 
   def add_items(possible_order, target_price, menu_hash, solutions)
-    for i in 0..@menu_keys_array.length - 1
+    for i in 0..menu_hash.keys.length - 1
       temp_order = possible_order.map{ |item| item }
-      temp_order << @menu_keys_array[i]
+      temp_order << menu_hash.keys[i]
       temp_order.sort!
       if get_order_total(temp_order, menu_hash) == target_price
         unless solutions.include?(temp_order)
