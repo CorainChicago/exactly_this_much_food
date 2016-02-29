@@ -16,13 +16,13 @@ class OrderPresenter
     clear_screen_and_move_to_home
     message_welcome
     file = load_file
-    @menu.file = check_filename(file)
-    @menu.menu_array = parse(menu.file)
-    @menu.get_target_price
+    menu.file = check_filename(file)
+    menu.menu_array = parse(menu.file)
+    menu.get_target_price
     menu.convert_array_to_hash
     menu.solutions = find_orders(menu.menu_hash, menu.target_price)
     formatted_solutions = format_results(menu.solutions)
-    message_results(menu.get_target_price, menu.solutions, formatted_solutions)
+    message_results(menu.target_price, menu.solutions, formatted_solutions)
     offer_to_repeat
   end
 
@@ -39,7 +39,13 @@ class OrderPresenter
     if file[-4..-1] != ".txt" 
       file = file << ".txt"
     end
+    if file[0..5] != "menus/" 
+      file = "menus/" << file
+    end
+    return file
   end
+
+
 
   def parse(file)
     menu_array = []

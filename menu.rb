@@ -16,7 +16,6 @@ class Menu
     result = @menu_array.map! {|string| string.partition(",")}
     result = result.each {|arr| arr.delete_if{|item| item == ","}}
     @menu_hash = Hash[result.flatten!.each_slice(2).to_a]
-    p @menu_hash
   end
 
 end
