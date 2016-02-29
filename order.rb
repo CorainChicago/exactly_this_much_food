@@ -95,7 +95,7 @@ class Order
   end
 
   def offer_to_repeat
-    puts "\n\nDo you want to search another folder? Type 'Y' or 'N'"
+    message_ask_to_repeat
     response = gets.chomp
     if response == 'Y' || response == 'y'
       @menu_array = []
@@ -118,6 +118,8 @@ class Order
       return
     end
   end
+
+  
 
 end
 

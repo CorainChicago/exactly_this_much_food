@@ -16,6 +16,10 @@ module Messenger
     puts "\nYou have #{number} options which add up to the target price of $#{price}."
   end
 
+  def message_ask_to_repeat
+    puts "\n\nDo you want to search another folder? Type 'Y' or 'N'"
+  end
+
   def message_have_a_great_meal
     puts "Have a great meal."
   end
