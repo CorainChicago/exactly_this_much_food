@@ -32,5 +32,18 @@ module OrderFinder
     end
   end
 
+  def format_results(solutions)
+    formatted_solutions = []
+    solutions.each do |solution|
+      unique_solutions = solution.uniq
+      option = []
+      unique_solutions.each do |s|
+        option << [solution.count(s), s]
+      end
+      formatted_solutions << option
+    end
+    return formatted_solutions
+  end
+
 
 end

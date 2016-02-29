@@ -21,7 +21,7 @@ class OrderPresenter
     @menu.get_target_price
     menu.convert_array_to_hash
     menu.solutions = find_orders(menu.menu_hash, menu.target_price)
-    formatted_solutions = menu.format_results(menu.solutions)
+    formatted_solutions = format_results(menu.solutions)
     message_results(menu.get_target_price, menu.solutions, formatted_solutions)
     offer_to_repeat
   end
