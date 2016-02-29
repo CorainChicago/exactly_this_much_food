@@ -43,6 +43,21 @@ RSpec.describe OrderPresenter do
     end
   end
 
+
+  describe "#parse" do 
+    it "reads the file given and returns an array of each line of text" do 
+      file = "test.txt"
+      menu_array = presenter.parse(file)
+      expect(menu_array).to be_a_kind_of(Array)
+    end
+
+    it "returns the correct array for the test file" do
+      file = "test.txt"
+      menu_array = presenter.parse(file)
+      expect(menu_array).to eq ["$15.05", "mixed fruit,$2.15", "french fries,$2.75", "side salad,$3.35", "hot wings,$3.55", "mozzarella sticks,$4.20", "sampler plate,$5.80"]
+    end
+  end
+
   describe "#message_results" do 
 
     it "prints the possible orders found for the user" do 
@@ -57,20 +72,6 @@ RSpec.describe OrderPresenter do
       formatted_results = []
       output = capture_standard_output { presenter.message_results("15.05", solutions, formatted_results)}
       expect(output).to eq "\nWe didn't find any possible combinations to match the amount you want to spend. You can update the file and rerun the program."
-    end
-  end
-
-  describe "#parse" do 
-    it "reads the file given and returns an array of each line of text" do 
-      file = "test.txt"
-      menu_array = presenter.parse(file)
-      expect(menu_array).to be_a_kind_of(Array)
-    end
-
-    it "adds the lines to the menu_array" do
-      file = "test.txt"
-      menu_array = presenter.parse(file)
-      expect(menu_array).not_to be_empty
     end
   end
 

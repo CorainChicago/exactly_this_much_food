@@ -1,10 +1,12 @@
 require_relative 'menu.rb'
 require_relative 'messenger.rb'
+require_relative 'order_finder.rb'
 
 class OrderPresenter
   attr_accessor :menu
 
   include Messenger
+  include OrderFinder
 
   def initialize
     @menu = Menu.new
@@ -19,9 +21,10 @@ class OrderPresenter
     menu.get_target_price
     menu.menu_array
     menu.convert_array_to_hash
-    solutions = menu.find_menus
-    formatted_solutions = menu.format_results(solutions)
-    message_results(menu.get_target_price, solutions, formatted_solutions)
+    p menu.menu_hash
+    menu.solutions = find_orders(menu.menu_hash, menu.target_price)
+    formatted_solutions = menu.format_results(menu.solutions)
+    message_results(menu.get_target_price, menu.solutions, formatted_solutions)
     offer_to_repeat
   end
 
@@ -77,7 +80,7 @@ class OrderPresenter
     response = gets.chomp
     if response == 'Y' || response == 'y'
       menu.menu_array = []
-      menu.target_price = ''
+      menu.target_price = nil
       menu.solutions = []
       menu.file = ""
       run
@@ -86,6 +89,5 @@ class OrderPresenter
       return
     end
   end
-
 
 end
