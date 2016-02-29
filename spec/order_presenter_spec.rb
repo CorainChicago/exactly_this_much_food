@@ -35,6 +35,11 @@ RSpec.describe OrderPresenter do
       expect(file).to eq "menus/test.txt"
     end
 
+    it "does not alter the file if the input has the correct format" do 
+      file_start = "menus/menu.txt"
+      file_checked = presenter.check_filename(file_start)
+      expect(file_checked).to eq file_start
+    end
   end
 
   describe "#message_error_enter_file_name_again" do 
@@ -43,7 +48,6 @@ RSpec.describe OrderPresenter do
       expect(output).to eq "\nThere was an error reading the file, please make sure the file name is entered correctly and in the menus folder. Type 'exit' to quit the program."
     end
   end
-
 
   describe "#parse" do 
     it "reads the file given and returns an array of each line of text" do 

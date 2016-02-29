@@ -24,5 +24,4 @@ module Messenger
     puts "Have a great meal."
   end
 
-
 end

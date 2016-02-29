@@ -5,7 +5,7 @@ A command line program to return orders from a menu file which exactly match the
 ## Instructions
 
 * [Clone](https://help.github.com/articles/cloning-a-repository/) this repository to your computer.
-* Add the text file(s)  into the menus folder. There is already an example file in the foler (menus/test.txt).  The target price needs to be on the first line on the file and menu item should follow.  The menu items need to follow this format of "item, $price", for example "french fries, $2.50".  
+* Add the text file(s) into the menus folder. There is already an example file in the folder ('menus/test.txt').  The target price needs to be on the first line on the file and menu item should follow.  The menu items need to follow this format of "item, $price", for example "french fries, $2.50".  
 
 Here is an example text file:
 ```text
@@ -22,7 +22,7 @@ sampler plate,$5.80
 * Type `ruby runner.rb` to run the program
 
 
-If you want to change the target price for your order, please update the number in your file, save and restart the program. 
+If you want to change the target price for your order, please update the number in your file, save and restart the program.   
 
 
 
