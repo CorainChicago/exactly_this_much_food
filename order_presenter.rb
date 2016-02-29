@@ -16,12 +16,10 @@ class OrderPresenter
     clear_screen_and_move_to_home
     message_welcome
     file = load_file
-    menu.file = check_filename(file)
-    menu.menu_array = parse(menu.file)
-    menu.get_target_price
-    menu.menu_array
+    @menu.file = check_filename(file)
+    @menu.menu_array = parse(menu.file)
+    @menu.get_target_price
     menu.convert_array_to_hash
-    p menu.menu_hash
     menu.solutions = find_orders(menu.menu_hash, menu.target_price)
     formatted_solutions = menu.format_results(menu.solutions)
     message_results(menu.get_target_price, menu.solutions, formatted_solutions)
@@ -54,7 +52,7 @@ class OrderPresenter
       message_error_enter_file_name_again
       file = load_file
       menu.file = check_filename(file)
-      menu.menu_array = parse(menu.file)
+      return @menu.menu_array = parse(menu.file)
     end
     return menu_array
   end
@@ -79,10 +77,6 @@ class OrderPresenter
     message_ask_to_repeat
     response = gets.chomp
     if response == 'Y' || response == 'y'
-      menu.menu_array = []
-      menu.target_price = nil
-      menu.solutions = []
-      menu.file = ""
       run
     else
       message_have_a_great_meal
