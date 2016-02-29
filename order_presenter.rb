@@ -45,8 +45,6 @@ class OrderPresenter
     return file
   end
 
-
-
   def parse(file)
     menu_array = []
     begin
@@ -57,10 +55,17 @@ class OrderPresenter
     rescue
       message_error_enter_file_name_again
       file = load_file
+      quit(file)
       menu.file = check_filename(file)
       return @menu.menu_array = parse(menu.file)
     end
     return menu_array
+  end
+
+  def quit(input)
+    if input == 'exit'
+      abort("\nThank you, the program is exiting.")
+    end
   end
 
   def message_results(target_price, solutions, formatted_results)

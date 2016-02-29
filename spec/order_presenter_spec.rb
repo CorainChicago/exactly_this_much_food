@@ -12,7 +12,7 @@ RSpec.describe OrderPresenter do
   end
 
   before do
-    $stdin = StringIO.new("test.txt\n")
+    $stdin = StringIO.new("test.txt")
   end
 
   let(:presenter) { OrderPresenter.new }
@@ -25,35 +25,34 @@ RSpec.describe OrderPresenter do
 
   describe "#check_filename" do
 
-      before do
-        $stdin = StringIO.new("test\n")
-      end
-
     it "add '.txt' to a filename when it's missing" do 
-      presenter.load_file
-      file = presenter.check_filename(presenter.menu.file)
-      expect(file).to eq "test.txt"
+      file = presenter.check_filename("menus/test")
+      expect(file).to eq "menus/test.txt"
     end
+
+    it "add 'menus/' to a filename when it's missing" do 
+      file = presenter.check_filename("test.txt")
+      expect(file).to eq "menus/test.txt"
+    end
+
   end
 
   describe "#message_error_enter_file_name_again" do 
     it "displays the message about an error and needing to enter the file name again" do
       output = capture_standard_output { presenter.message_error_enter_file_name_again }
-      expect(output).to eq "\nThere was an error reading the file, please make sure the file name is entered correctly and in this folder (not listed in a sub-directory)."
+      expect(output).to eq "\nThere was an error reading the file, please make sure the file name is entered correctly and in the menus folder. Type 'exit' to quit the program."
     end
   end
 
 
   describe "#parse" do 
     it "reads the file given and returns an array of each line of text" do 
-      file = "test.txt"
-      menu_array = presenter.parse(file)
+      menu_array = presenter.parse("menus/test.txt")
       expect(menu_array).to be_a_kind_of(Array)
     end
 
     it "returns the correct array for the test file" do
-      file = "test.txt"
-      menu_array = presenter.parse(file)
+      menu_array = presenter.parse("menus/test.txt")
       expect(menu_array).to eq ["$15.05", "mixed fruit,$2.15", "french fries,$2.75", "side salad,$3.35", "hot wings,$3.55", "mozzarella sticks,$4.20", "sampler plate,$5.80"]
     end
   end
