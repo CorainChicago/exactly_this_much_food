@@ -1,4 +1,0 @@
-module FileParser
-
-  
-end

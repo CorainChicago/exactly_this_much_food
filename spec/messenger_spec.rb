@@ -41,7 +41,7 @@ RSpec.describe Messenger do
   describe "#message_ask_to_repeat" do 
 
     it "asks the user if they want to repeat the game" do
-       output = capture_standard_output { example.message_ask_to_repeat}
+      output = capture_standard_output { example.message_ask_to_repeat}
       expect(output).to eq "\n\nDo you want to search another folder? Type 'Y' or 'N'" 
     end
   end

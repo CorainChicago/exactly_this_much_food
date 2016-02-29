@@ -17,43 +17,9 @@ RSpec.describe Order do
 
   let (:order) { Order.new }
 
-  describe "#load_file" do
-    it "takes the user's input from the command line" do 
-      expect(order.load_file).to eq 'test.txt'
-    end
-  end
-
-  describe "#check_filename" do 
-      before do
-        $stdin = StringIO.new("test\n")
-      end
-    it "checks a filename" do 
-      order2 = Order.new
-      order2.load_file
-      order2.check_filename
-      expect(order2.file).to eq "test.txt"
-    end
-  end
-
-  describe "#parse" do 
-    it "reads the file given and returns an array of each line of text" do 
-      file = order.load_file
-      result = order.parse(file)
-      expect(result[0]).to eq "$15.05"
-      expect(result.length).to eq 7
-    end
-    it "adds the lines to th @menu_array" do
-    expect(order.menu_array).to be_empty
-    file = order.load_file
-    order.parse(file)
-    expect(order.menu_array).not_to be_empty
-    end
-  end
-
   describe "#get_target_price" do 
     it "takes the first item from the menu_array" do
-      file = order.load_file
-      order.parse(file)
+      order.menu_array = ["$15.05", "mixed fruit,$2.15", "french fries,$2.75", "side salad,$3.35", "hot wings,$3.55", "mozzarella sticks,$4.20", "sampler plate,$5.80"]
       goal = order.get_target_price
       expect(goal).to eq  "15.05"
     end 
@@ -62,10 +28,8 @@ RSpec.describe Order do
   describe "#convert_array_to_hash" do 
 
     before do  
-      file = order.load_file
-      order.parse(file)
+      order.menu_array = ["$15.05", "mixed fruit,$2.15", "french fries,$2.75", "side salad,$3.35", "hot wings,$3.55", "mozzarella sticks,$4.20", "sampler plate,$5.80"]
       order.get_target_price
-      order.menu_array
       order.convert_array_to_hash
     end
 
@@ -81,10 +45,8 @@ RSpec.describe Order do
 
   describe "#get_order_total" do
     before do  
-      file = order.load_file
-      order.parse(file)
+      order.menu_array = ["$15.05", "mixed fruit,$2.15", "french fries,$2.75", "side salad,$3.35", "hot wings,$3.55", "mozzarella sticks,$4.20", "sampler plate,$5.80"]
       order.get_target_price
-      order.menu_array
       order.convert_array_to_hash
     end
     
@@ -95,10 +57,8 @@ RSpec.describe Order do
 
   describe "#find_orders" do
     before do  
-      file = order.load_file
-      order.parse(file)
+      order.menu_array = ["$15.05", "mixed fruit,$2.15", "french fries,$2.75", "side salad,$3.35", "hot wings,$3.55", "mozzarella sticks,$4.20", "sampler plate,$5.80"]
       order.get_target_price
-      order.menu_array
       order.convert_array_to_hash
     end
     
@@ -117,10 +77,8 @@ RSpec.describe Order do
 
   describe "#possible_orders" do
     it "will return 2 order options for a specific target_price from the menu_hash" do
-      file = order.load_file
-      order.parse(file)
+      order.menu_array = ["$15.05", "mixed fruit,$2.15", "french fries,$2.75", "side salad,$3.35", "hot wings,$3.55", "mozzarella sticks,$4.20", "sampler plate,$5.80"]
       order.get_target_price
-      order.menu_array
       order.convert_array_to_hash
       result = order.find_orders
       expect(result.length).to eq 2
@@ -130,10 +88,8 @@ RSpec.describe Order do
 
   describe "#format_results" do 
     it "formats the @solutions display to provide the count and item" do 
-      file = order.load_file
-      order.parse(file)
+      order.menu_array = ["$15.05", "mixed fruit,$2.15", "french fries,$2.75", "side salad,$3.35", "hot wings,$3.55", "mozzarella sticks,$4.20", "sampler plate,$5.80"]
       order.get_target_price
-      order.menu_array
       order.convert_array_to_hash
       solutions = order.find_orders
       results = order.format_results(solutions)
@@ -141,34 +97,5 @@ RSpec.describe Order do
     end
   end
 
-  # describe "#message_results" do 
-
-  #   it "prints the possible orders found for the user" do 
-  #     order.load_file
-  #     order.parse
-  #     order.get_target_price
-  #     order.menu_array
-  #     order.convert_array_to_hash
-  #     solutions = order.find_orders
-  #     formatted_results = order.format_results(solutions)
-  #     output = capture_standard_output { order.message_results(solutions, formatted_results)}
-  #     expect(output).to eq "\nYou have 2 options which add up to the target price of $15.05.\n\n\nHere is option 1: \n\n7 of the mixed fruit\n\n\nHere is option 2: \n\n2 of the hot wings\n1 of the mixed fruit\n1 of the sampler plate"
-  #   end
-  # end
-
-  # it "displays an error message if no sulutions are found" do
-  #   order.load_file
-  #   order.check_filename
-  #   order.parse
-  #   order.get_target_price
-  #   order.menu_array
-  #   order.convert_array_to_hash 
-  #   order.target_price = "0.00"
-  #   solutions = order.find_orders
-  #   formatted_results = order.format_results(solutions)
-  #   expect(order.target_price).to eq "0.00"
-  #   output = capture_standard_output { order.message_results(solutions, formatted_results)}
-  #   expect(output).to eq "We didn't find any possible combinations to match the amount you want to spend. You can update the file and rerun the program."
-  # end
 
 end
