@@ -1,4 +1,4 @@
-class Order
+class Menu
   attr_accessor :menu_array, :target_price, :menu_hash, :solutions, :file
 
   def initialize

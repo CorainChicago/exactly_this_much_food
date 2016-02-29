@@ -1,27 +1,27 @@
-require_relative 'order.rb'
+require_relative 'menu.rb'
 require_relative 'messenger.rb'
 
 class OrderPresenter
-  attr_accessor :order
+  attr_accessor :menu
 
   include Messenger
 
   def initialize
-    @order = Order.new
+    @menu = Menu.new
   end
 
   def run
     clear_screen_and_move_to_home
     message_welcome
     file = load_file
-    order.file = check_filename(file)
-    order.menu_array = parse(order.file)
-    order.get_target_price
-    order.menu_array
-    order.convert_array_to_hash
-    solutions = order.find_orders
-    formatted_solutions = order.format_results(solutions)
-    message_results(order.get_target_price, solutions, formatted_solutions)
+    menu.file = check_filename(file)
+    menu.menu_array = parse(menu.file)
+    menu.get_target_price
+    menu.menu_array
+    menu.convert_array_to_hash
+    solutions = menu.find_menus
+    formatted_solutions = menu.format_results(solutions)
+    message_results(menu.get_target_price, solutions, formatted_solutions)
     offer_to_repeat
   end
 
@@ -31,7 +31,7 @@ class OrderPresenter
   end
 
   def load_file
-    order.file = gets.chomp
+    menu.file = gets.chomp
   end
 
   def check_filename(file)
@@ -50,8 +50,8 @@ class OrderPresenter
     rescue
       message_error_enter_file_name_again
       file = load_file
-      order.file = check_filename(file)
-      order.menu_array = parse(order.file)
+      menu.file = check_filename(file)
+      menu.menu_array = parse(menu.file)
     end
     return menu_array
   end
@@ -62,9 +62,9 @@ class OrderPresenter
     else
       counter = 1
       message_number_solutions_with_price(solutions.length, target_price)
-      formatted_results.each do |order|
+      formatted_results.each do |menu|
         puts "\n\nHere is option #{counter}: \n\n"
-        order.each do |item|
+        menu.each do |item|
           puts "#{item[0]} of the #{item[1]}"
         end
         counter += 1
@@ -76,10 +76,10 @@ class OrderPresenter
     message_ask_to_repeat
     response = gets.chomp
     if response == 'Y' || response == 'y'
-      order.menu_array = []
-      order.target_price = ''
-      order.solutions = []
-      order.file = ""
+      menu.menu_array = []
+      menu.target_price = ''
+      menu.solutions = []
+      menu.file = ""
       run
     else
       message_have_a_great_meal

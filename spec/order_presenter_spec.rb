@@ -31,7 +31,7 @@ RSpec.describe OrderPresenter do
 
     it "add '.txt' to a filename when it's missing" do 
       presenter.load_file
-      file = presenter.check_filename(presenter.order.file)
+      file = presenter.check_filename(presenter.menu.file)
       expect(file).to eq "test.txt"
     end
   end
