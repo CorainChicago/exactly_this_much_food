@@ -1,3 +1,5 @@
+# initialize it with the arguments needed and then not need them for arguments for the methods. Move it into a class
+
 module OrderFinder
 
   def get_order_total(items, menu_hash)
@@ -12,8 +14,11 @@ module OrderFinder
     solutions = []
     possible_order = []
     add_items(possible_order, target_price, menu_hash, solutions)
-    return solutions
+    solutions
   end
+
+  # Check budget left before the next pass to  get_order_total to keeps from checking items over the budget amount left.
+
 
   def add_items(possible_order, target_price, menu_hash, solutions)
     for i in 0..menu_hash.keys.length - 1

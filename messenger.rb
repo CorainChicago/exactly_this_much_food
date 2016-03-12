@@ -1,3 +1,7 @@
+# This Messenger is unique to the user story for the app and won't really be needed in other use cases - Thus a class makes better sense. 
+
+#reread Ruby's definition of modules
+
 module Messenger
 
   def message_welcome

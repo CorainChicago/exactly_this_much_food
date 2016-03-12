@@ -8,7 +8,7 @@ class Menu
     @file = ""
   end
 
-  def get_target_price
+  def get_target_price!
     @target_price = @menu_array.shift.delete("$")
   end
 
