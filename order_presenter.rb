@@ -18,12 +18,17 @@ class OrderPresenter
     file = load_file
     menu.file = check_filename(file)
     menu.menu_array = parse(menu.file)
-    menu.get_target_price
-    menu.convert_array_to_hash
-    menu.solutions = find_orders(menu.menu_hash, menu.target_price)
-    formatted_solutions = format_results(menu.solutions)
-    message_results(menu.target_price, menu.solutions, formatted_solutions)
-    offer_to_repeat
+    if menu.get_target_price != "$0.00" || menu.get_target_price != "$0"
+      menu.get_target_price
+      menu.convert_array_to_hash
+      menu.solutions = find_orders(menu.menu_hash, menu.target_price)
+      formatted_solutions = format_results(menu.solutions)
+      message_results(menu.target_price, menu.solutions, formatted_solutions)
+      offer_to_repeat
+    else
+      message_zero_price
+      offer_to_repeat
+    end
   end
 
   def clear_screen_and_move_to_home
