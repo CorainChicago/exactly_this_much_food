@@ -28,4 +28,8 @@ module Messenger
     puts "Have a great meal."
   end
 
+  def message_zero_total
+    puts "The total is zero."
+  end
+
 end
